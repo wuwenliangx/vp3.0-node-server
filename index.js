@@ -39,7 +39,7 @@ app.listen(9547, () => {
 
 /* 跨域配置 */
 var corsOptions = {
-  origin: ["http://192.168.191.155:9003", "http://192.168.181.111:9003", "*"],
+  origin: ["http://127.0.0.1:8080", "http://192.168.191.155:9003", "http://192.168.181.111:9003"],
   methods: ["GET", "PUT", "POST"],
   credentials: true,
   preflightContinue: true,
@@ -276,10 +276,10 @@ function userSearch(req, res) {
   usersCache =
     start && end
       ? usersCache.filter(
-          (v) =>
-            new Date(v.birth) >= new Date(start) &&
-            new Date(v.birth) <= new Date(end)
-        )
+        (v) =>
+          new Date(v.birth) >= new Date(start) &&
+          new Date(v.birth) <= new Date(end)
+      )
       : usersCache;
   usersCache = cityId
     ? usersCache.filter((v) => v.cityId === cityId)
@@ -351,10 +351,10 @@ function userExport(req, res) {
   usersCache =
     start && end
       ? usersCache.filter(
-          (v) =>
-            new Date(v.birth) >= new Date(start) &&
-            new Date(v.birth) <= new Date(end)
-        )
+        (v) =>
+          new Date(v.birth) >= new Date(start) &&
+          new Date(v.birth) <= new Date(end)
+      )
       : usersCache;
   usersCache = cityId
     ? usersCache.filter((v) => v.cityId === cityId)
