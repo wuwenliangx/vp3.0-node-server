@@ -568,6 +568,10 @@ router.post("/tree/delete", treeNodeDelete);
 
 router.post("/httpTest", httpTest);
 
+router.post("*", (req, res) => {
+  res.status(404).send('对不起，请求地有误！');
+});
+
 app.use(cors(corsOptions)); // 跨域
 app.use("/public", express.static("./public")); //express静态资源托管，暴露public
 app.use(bodyParser.json()); //  application/json parser
