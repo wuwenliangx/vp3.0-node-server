@@ -1,4 +1,6 @@
 const UUIDFactory = require("./uuid");
+const moment = require("moment");
+const _ = require("lodash");
 
 const likes = [
   { id: "running", name: "跑步" },
@@ -110,6 +112,27 @@ const trees = [
   { id: "0391", label: "焦作", level: 1, children: [] },
 ];
 
+const form = {
+  label: users[0].name,
+  p: users[0].introduce,
+  input: users[0].name,
+  textarea: users[0].introduce,
+  switch: "good",
+  select: users[0].cityId,
+  selectMul: _.uniq(users.map(v => v.cityId)).join(","),
+  radio: users[0].genderId,
+  checkbox: users[0].likeId,
+  calendar: users[0].birth,
+  calendarMul: [users[0].birth, moment().format('YYYY-MM-DD')].join(","),
+  icon: icons[0],
+  image: images[0],
+  video: videos[0],
+  tree: "020",
+  treeMul: "010,010-CY,010-CY-AYC,010-CP-TTYB",
+  selectTree: "020",
+  selectTreeMul: "010,010-CY,010-CP-TTYB",
+}
+
 module.exports = {
   likes,
   genders,
@@ -119,4 +142,5 @@ module.exports = {
   videos,
   users,
   trees,
+  form
 };

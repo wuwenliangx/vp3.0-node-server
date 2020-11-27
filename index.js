@@ -2,6 +2,7 @@ const path = require("path"); //处理路径
 const express = require("express");
 const bodyParser = require("body-parser");
 const moment = require("moment");
+const _ = require("lodash");
 const cors = require("cors"); // 处理跨域
 const formidable = require("formidable"); // 处理文件上传
 const fs = require("fs");
@@ -20,6 +21,7 @@ let {
   videos,
   users,
   trees,
+  form,
 } = require("./utils/data");
 
 /* 操作树的工具函数 */
@@ -547,6 +549,14 @@ function httpTest(req, res) {
   res.json({ STATUS: "200", RESULT: { list: formData } });
 }
 
+/** form */
+function getForm(req, res) {
+  let formData = req.body;
+  console.log(moment().format("YYYY-MM-DD HH:mm:ss"), req.url, formData);
+
+  res.json({ STATUS: "200", RESULT: { list: [form] } });
+}
+
 router.post("/multiUpload", multiUpload);
 router.post("/upload", upload);
 
@@ -565,6 +575,8 @@ router.post("/gender/list", genderList);
 router.post("/tree", tree);
 router.post("/tree/edit", treeNodeEdit);
 router.post("/tree/delete", treeNodeDelete);
+
+router.post("/form", getForm);
 
 router.post("/httpTest", httpTest);
 
