@@ -557,6 +557,27 @@ function getForm(req, res) {
   res.json({ STATUS: "200", RESULT: { list: [form] } });
 }
 
+/** 树懒加载 */
+function treeList(req, res) {
+  let formData = req.body;
+  console.log(moment().format("YYYY-MM-DD HH:mm:ss"), req.url, formData);
+
+  let pid = formData.pid;
+  var targetNodes = [];
+  var list = [];
+  if (!pid) {
+    list = trees.map(v => { var _v = JSON.parse(JSON.stringify(v)); delete _v.children; return _v });
+  } else {
+    getNodesByIds([pid], trees, targetNodes);
+    if (targetNodes.length > 0) {
+      list = targetNodes[0].children.map(v => { var _v = JSON.parse(JSON.stringify(v)); delete _v.children; return _v });
+    }
+  }
+  setTimeout(() => {
+    res.json({ STATUS: "200", RESULT: { list: list } });
+  }, 1000);
+}
+
 router.post("/multiUpload", multiUpload);
 router.post("/upload", upload);
 
@@ -575,6 +596,8 @@ router.post("/gender/list", genderList);
 router.post("/tree", tree);
 router.post("/tree/edit", treeNodeEdit);
 router.post("/tree/delete", treeNodeDelete);
+
+router.post("/tree/list", treeList);
 
 router.post("/form", getForm);
 

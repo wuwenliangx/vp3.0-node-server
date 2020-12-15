@@ -79,7 +79,7 @@ function getNodesByIds(ids, tree, nodes) {
       nodes.push(t);
     }
     if (Array.isArray(t.children) && t.children.length > 0) {
-      getNodes(ids, t.children, nodes);
+      getNodesByIds(ids, t.children, nodes);
     }
   }
 }
