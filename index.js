@@ -603,6 +603,10 @@ router.post("/form", getForm);
 
 router.post("/httpTest", httpTest);
 
+router.post("/empty", (req,res)=>{
+  res.json({ STATUS: "200", RESULT: { list: [{}] } });
+});
+
 router.post("*", (req, res) => {
   res.status(404).send('对不起，请求地有误！');
 });
