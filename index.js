@@ -578,6 +578,14 @@ function treeList(req, res) {
   }, 1000);
 }
 
+/** 空数据 */
+function empty(req, res) {
+  let formData = req.body;
+  console.log(moment().format("YYYY-MM-DD HH:mm:ss"), req.url, formData);
+
+  res.json({ STATUS: "200", RESULT: { list: [{}] } });
+}
+
 router.post("/multiUpload", multiUpload);
 router.post("/upload", upload);
 
@@ -603,9 +611,7 @@ router.post("/form", getForm);
 
 router.post("/httpTest", httpTest);
 
-router.post("/empty", (req,res)=>{
-  res.json({ STATUS: "200", RESULT: { list: [{}] } });
-});
+router.post("/empty", empty);
 
 router.post("*", (req, res) => {
   res.status(404).send('对不起，请求地有误！');
